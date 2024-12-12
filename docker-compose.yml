@@ -1,0 +1,345 @@
+# version: "3.9"
+services:
+  consul:
+    image: consul:1.15
+    container_name: consul
+    volumes:
+      - ./services/consul/config:/consul/config
+      - ./services/consul/data:/consul/data
+      - ./services/consul/logs:/consul/logs
+    command:  consul agent -server -bootstrap -client=0.0.0.0 -ui -data-dir=/consul/data -node=consul-node -datacenter=dc1 -log-level=debug -enable-script-checks=true -config-dir=/consul/config
+    ports:
+      - "8500:8500"
+      - "8600:8600/udp"
+  nginx:
+    container_name: nginx
+    image: "nginx:1.26"
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - "./php:/home/webroot"
+      - "./js:/home/web"
+      - "./services/nginx/nginx.conf:/etc/nginx/nginx.conf"
+      - "./services/nginx/conf:/etc/nginx/conf.d"
+      - "./services/nginx/tcpconf:/etc/nginx/tcpconf"
+      - "./services/nginx/log:/var/log/nginx"
+    depends_on:
+      - php72
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      admin_net:
+        ipv4_address: 172.19.0.100
+  php72:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: "osesame/php:7.2-ola"
+    container_name: php
+    restart: always
+    ports:
+      - "9000:9000"
+      - "9009:9009"
+    volumes:
+      - "./php:/home/webroot"
+      - "./services/php72/conf:/usr/local/etc"
+      - "./services/php72/log:/var/log/php"
+    environment:
+      - TZ=Asia/Shanghai
+    extra_hosts:
+      - "user.mime.test:172.19.0.100"
+      - "recharge.test:172.19.0.100"
+      - "ps.help.test:172.19.0.100"
+      - "pt.help.test:172.19.0.100"
+      - "veeka.help.test:172.19.0.100"
+      - "tago.help.test:172.19.0.100"
+    networks:
+      - admin_net
+  mysql:
+    image: "mysql:5.7"
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - "./services/mysql/datadir:/var/lib/mysql"
+      - "./services/mysql/conf:/etc/mysql/conf.d"
+      - "./services/mysql/log:/var/log/mysql"
+    networks:
+      - admin_net
+  mysql8:
+    image: "mysql:8.4"
+    container_name: mysql8
+    restart: always
+    ports:
+      - "33068:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - "./services/mysql8/data:/var/lib/mysql"
+      - "./services/mysql8/conf:/etc/mysql/conf.d"
+      - "./services/mysql8/log:/var/log/mysql"
+    networks:
+      - admin_net
+  mongo:
+    image: mongo:5.0.22
+    container_name: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./services/mongo/database:/data/db
+      - ./services/mongo/logs:/data/logs
+      - ./services/mongo/config:/data/configdb
+    environment:
+      - TZ=Asia/Shanghai
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    networks:
+      - admin_net
+  mongo-express:
+    image: mongo-express:1.0-20
+    container_name: mongo-express
+    depends_on:
+      - mongo
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_OPTIONS_EDITORTHEME=3024-night
+      # - ME_CONFIG_BASICAUTH_USERNAME=admin
+      # - ME_CONFIG_BASICAUTH_PASSWORD=123456
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=admin
+      - ME_CONFIG_MONGODB_SERVER=mongo
+    networks:
+      - admin_net
+  redis:
+    image: "redis:6.2"
+    container_name: redis
+    restart: always
+    command: "redis-server /usr/local/etc/redis/redis.conf"
+    ports:
+      - "6379:6379"
+    volumes:
+      - "./services/redis/conf:/usr/local/etc/redis"
+      - "./services/redis/data:/data"
+    networks:
+      - admin_net
+  beanstalk:
+    image: "schickling/beanstalkd"
+    container_name: beanstalk
+    ports:
+      - "11300:11300"
+    restart: always
+    networks:
+      - admin_net
+  lookup:
+    container_name: lookup
+    image: nsqio/nsq
+    command: /nsqlookupd
+    restart: always
+    ports:
+      - "4160:4160"
+      - "4161:4161"
+    networks:
+      - admin_net
+  nsq:
+    container_name: nsq
+    image: nsqio/nsq
+    command: /nsqd --lookupd-tcp-address=lookup:4160 --broadcast-address=nsq
+    privileged: true
+    restart: always
+    depends_on:
+      - lookup
+    ports:
+      - "4150:4150"
+      - "4151:4151"
+    networks:
+      - admin_net
+  # nsqadmin:
+  #   image: nsqio/nsq:v1.2.1
+  #   container_name: nsqadmin
+  #   command: /nsqadmin --lookupd-http-address=lookup:4161
+  #   restart: always
+  #   depends_on:
+  #     - lookup
+  #   ports:
+  #     - "4171:4171"
+  #   networks:
+  #     - admin_net
+  zookeeper:
+    image: zookeeper:3.9
+    container_name: zookeeper
+    # restart: always
+    ports:
+      - "2181:2181"
+    networks:
+      - admin_net
+  kafka:
+    image: bitnami/kafka:3.3.2
+    container_name: kafka
+    # restart: always
+    depends_on: [ zookeeper ]
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_CREATE_TOPICS: "test:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    volumes:
+      - ./services/kafka/config:/opt/kafka/config
+      - ./services/kafka/logs:/opt/kafka/logs
+    networks:
+      - admin_net
+  es:
+    image: elasticsearch:7.10.1
+    container_name: elasticsearch7
+    # restart: always
+    volumes:
+      - ./services/elasticsearch/data:/usr/share/elasticsearch/data
+      - ./services/elasticsearch/conf/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./services/elasticsearch/logs:/user/share/elasticsearch/logs
+      - ./services/elasticsearch/plugins:/user/share/elasticsearch/plugins
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx1G"
+      - "discovery.type=single-node"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - admin_net
+  esview:
+    image: kecikeci/elastic_view:latest
+    container_name: esview
+    ports:
+      - "8390:8090"
+    volumes:
+      - ./services/es_view/data:/data
+      - ./services/es_view/logs:/logs
+      - ./services/es_view/config:/config
+    depends_on:
+      - mysql
+    networks:
+      - admin_net
+  # ssdb:
+  #   image: leobuskin/ssdb-docker:latest
+  #   name: ssdb
+  #   restart: always
+  #   volumes:
+  #     - ./services/ssdb/ssdb.conf:/ssdb/ssdb.conf
+  #     - ./services/ssdb/var:/ssdb/var
+  #   ports:
+  #     - "8888:8888"
+  #   networks:
+  #     - admin_net
+  # ssdb-admin:
+  #   image: jhao104/ssdb-admin:3.1.0
+  #   # restart: always
+  #   volumes:
+  #     - ./services/ssdb-admin/conf/setting.py:/SSDBAdmin/setting.py
+  #   ports:
+  #     - "5500:5000"
+  #   networks:
+  #     - admin_net
+  soar:
+    container_name: soar
+    image: becivells/soar-web
+    restart: always
+    ports:
+      - "5077:5077"
+    networks:
+      - admin_net
+  canal:
+    image: canal/canal-server:v1.1.6
+    container_name: canal
+    # restart: always
+    privileged: true
+    ports:
+      - "11111:11111"
+      - "11110:11110"
+      - "11112:11112"
+      - "9100:9100"
+    environment:
+      - TZ=Asia/Shanghai
+      - canal.register.ip=canal
+      - canal.admin.manager=canal-admin:8089
+      - canal.admin.port=11110
+      - canal.admin.user=admin
+      - canal.admin.passwd=4ACFE3202A5FF5CF467898FC58AAB1D615029441
+      - canal.admin.register.auto = true
+    volumes:
+      - ./services/canal-server/logs:/home/admin/canal-server/logs
+    depends_on:
+      - mysql
+    networks:
+      - admin_net
+  canal-admin:
+    image: canal/canal-admin:v1.1.6
+    container_name: canal-admin
+    privileged: true
+    ports:
+      - 8089:8089
+    environment:
+      - TZ=Asia/Shanghai
+      - server.port=8089
+      - spring.datasource.address=mysql:3306
+      - spring.datasource.database=canal_manager
+      - spring.datasource.username=root
+      - spring.datasource.password=123456
+    volumes:
+      - ./services/canal-admin/logs:/home/admin/canal-admin/logs
+    depends_on:
+      - mysql
+    networks:
+      - admin_net
+  pika:
+    container_name: pika
+    image: pikadb/pika:3.6.0
+    restart: always
+    ports:
+      - 9221:9221
+    networks:
+      - admin_net
+  etcd:
+    container_name: etcd
+    image: bitnami/etcd:3.5.5
+    volumes:
+      - "./services/etcd/data:/bitnami/etcd/data"
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_ADVERTISE_CLIENT_URLS=http://0.0.0.0:2379
+    ports:
+      - "2379:2379"
+      - "2380:2380"
+    networks:
+      - admin_net
+  etcdkeeper:
+    container_name: etcdkeeper
+    image: evildecay/etcdkeeper:v0.7.6
+    ports:
+      - "8099:8080"
+    networks:
+      - admin_net
+  # redpandadata:
+  #   container_name: redpandadata
+  #   image: docker.redpanda.com/redpandadata/console:latest
+  #   environment:
+  #     - KAFKA_BROKERS=kafka:9092
+  #   ports:
+  #     - "8098:8080"
+  #   networks:
+  #     - admin_net
+  frpc:
+    container_name: frpc
+    image: snowdreamtech/frpc:latest-dev
+    volumes:
+      - "./services/frpc/conf:/etc/frp"
+networks:
+  admin_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.19.0.0/24
+          gateway: 172.19.0.1

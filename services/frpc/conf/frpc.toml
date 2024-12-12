@@ -1,0 +1,15 @@
+serverAddr = ""
+serverPort = 7000
+auth.token = ""
+
+# log.to = "./frpc.log"
+[[proxies]]
+name = "admin"
+type = "http"
+localIP = "192.168.64.1"
+localPort = 80
+customDomains = []
+hostHeaderRewrite = ""
+
+
+

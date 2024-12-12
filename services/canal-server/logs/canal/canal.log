@@ -1,0 +1,169 @@
+2024-11-13 10:35:11.974 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify start 51-all successful.
+2024-11-13 10:36:07.292 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify stop 51-all successful.
+2024-11-13 10:36:07.521 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify start 51-all successful.
+2024-11-13 10:36:07.522 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify reload 51-all successful.
+2024-11-13 10:42:29.169 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify stop 51-all successful.
+2024-11-13 10:42:29.383 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify start 51-all successful.
+2024-11-13 10:42:29.383 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify reload 51-all successful.
+2024-11-13 10:42:39.434 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify stop 51-all successful.
+2024-11-13 10:42:39.646 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify start 51-all successful.
+2024-11-13 10:42:39.646 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify reload 51-all successful.
+2024-11-13 11:02:19.482 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify stop 51-all successful.
+2024-11-13 11:02:19.779 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify start 51-all successful.
+2024-11-13 11:02:19.780 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify reload 51-all successful.
+2024-11-13 11:22:42.579 [Thread-4] INFO  c.a.o.canal.connector.kafka.producer.CanalKafkaProducer - ## stop the kafka producer
+2024-11-13 11:22:42.580 [Thread-3] INFO  com.alibaba.otter.canal.deployer.CanalStarter - ## stop the canal server
+2024-11-13 11:22:42.602 [Thread-4] INFO  c.a.o.canal.connector.kafka.producer.CanalKafkaProducer - ## kafka producer is down.
+2024-11-13 11:22:42.995 [Thread-3] INFO  com.alibaba.otter.canal.deployer.CanalController - ## stop the canal server[172.19.0.11(canal):11111]
+2024-11-13 11:22:43.057 [Thread-3] INFO  com.alibaba.otter.canal.deployer.CanalStarter - ## canal server is down.
+2024-11-13 11:22:47.291 [main] INFO  com.alibaba.otter.canal.deployer.CanalLauncher - ## set default uncaught exception handler
+2024-11-13 11:22:47.307 [main] INFO  com.alibaba.otter.canal.deployer.CanalLauncher - ## load canal configurations
+2024-11-13 11:22:48.323 [main] WARN  org.apache.kafka.clients.producer.ProducerConfig - The configuration 'kerberos.enable' was supplied but isn't a known config.
+2024-11-13 11:22:48.324 [main] WARN  org.apache.kafka.clients.producer.ProducerConfig - The configuration 'kerberos.krb5.file' was supplied but isn't a known config.
+2024-11-13 11:22:48.324 [main] WARN  org.apache.kafka.clients.producer.ProducerConfig - The configuration 'kerberos.jaas.file' was supplied but isn't a known config.
+2024-11-13 11:22:48.326 [main] INFO  com.alibaba.otter.canal.deployer.CanalStarter - ## start the canal server.
+2024-11-13 11:22:48.366 [main] INFO  com.alibaba.otter.canal.deployer.CanalController - ## start the canal server[172.19.0.11(canal):11111]
+2024-11-13 11:22:48.415 [main] INFO  com.alibaba.otter.canal.deployer.CanalStarter - ## the canal server is running now ......
+2024-11-13 11:22:49.703 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify start ps.user_money_local successful.
+2024-11-13 11:22:49.835 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify start 51-all successful.
+2024-11-13 11:23:13.201 [canal-server-scan-0] ERROR com.alibaba.otter.canal.deployer.CanalLauncher - scan failed
+com.alibaba.otter.canal.common.CanalException: load manager config failed.
+Caused by: java.lang.RuntimeException: requestGet remote error, request : http://canal-admin:8089/api/v1/config/server_polling?ip=canal&port=11110&md5=f7c78b84dd5ae8fa5d73b821ac4235da&register=1&cluster=&name=d19acb96ea52
+	at com.alibaba.otter.canal.instance.manager.plain.HttpHelper.get(HttpHelper.java:100) ~[canal.instance.manager-1.1.6.jar:na]
+	at com.alibaba.otter.canal.instance.manager.plain.PlainCanalConfigClient.doQuery(PlainCanalConfigClient.java:121) ~[canal.instance.manager-1.1.6.jar:na]
+	at com.alibaba.otter.canal.instance.manager.plain.PlainCanalConfigClient.queryConfig(PlainCanalConfigClient.java:110) ~[canal.instance.manager-1.1.6.jar:na]
+	at com.alibaba.otter.canal.instance.manager.plain.PlainCanalConfigClient.findServer(PlainCanalConfigClient.java:77) ~[canal.instance.manager-1.1.6.jar:na]
+	at com.alibaba.otter.canal.deployer.CanalLauncher$1.run(CanalLauncher.java:99) ~[canal.deployer-1.1.6.jar:na]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [na:1.8.0_181]
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:308) [na:1.8.0_181]
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(ScheduledThreadPoolExecutor.java:180) [na:1.8.0_181]
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:294) [na:1.8.0_181]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_181]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_181]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_181]
+Caused by: org.apache.http.conn.HttpHostConnectException: Connect to canal-admin:8089 [canal-admin/172.19.0.12] failed: Connection refused (Connection refused)
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:151) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:353) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:380) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:184) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:88) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:184) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82) ~[httpclient-4.5.1.jar:4.5.1]
+	at com.alibaba.otter.canal.instance.manager.plain.HttpHelper.get(HttpHelper.java:90) ~[canal.instance.manager-1.1.6.jar:na]
+	... 11 common frames omitted
+Caused by: java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method) ~[na:1.8.0_181]
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_181]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_181]
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_181]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_181]
+	at java.net.Socket.connect(Socket.java:589) ~[na:1.8.0_181]
+	at org.apache.http.conn.socket.PlainConnectionSocketFactory.connectSocket(PlainConnectionSocketFactory.java:74) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:134) ~[httpclient-4.5.1.jar:4.5.1]
+	... 20 common frames omitted
+2024-11-13 11:23:14.915 [canal-instance-scan-0] ERROR c.a.o.c.deployer.monitor.ManagerInstanceConfigMonitor - scan failed
+java.lang.RuntimeException: requestGet remote error, request : http://canal-admin:8089/api/v1/config/instances_polling?md5=&ip=canal&port=11110
+	at com.alibaba.otter.canal.instance.manager.plain.HttpHelper.get(HttpHelper.java:100) ~[canal.instance.manager-1.1.6.jar:na]
+	at com.alibaba.otter.canal.instance.manager.plain.PlainCanalConfigClient.doQuery(PlainCanalConfigClient.java:121) ~[canal.instance.manager-1.1.6.jar:na]
+	at com.alibaba.otter.canal.instance.manager.plain.PlainCanalConfigClient.findInstances(PlainCanalConfigClient.java:100) ~[canal.instance.manager-1.1.6.jar:na]
+	at com.alibaba.otter.canal.deployer.monitor.ManagerInstanceConfigMonitor.scan(ManagerInstanceConfigMonitor.java:75) ~[canal.deployer-1.1.6.jar:na]
+	at com.alibaba.otter.canal.deployer.monitor.ManagerInstanceConfigMonitor.lambda$start$1(ManagerInstanceConfigMonitor.java:46) ~[canal.deployer-1.1.6.jar:na]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) ~[na:1.8.0_181]
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:308) ~[na:1.8.0_181]
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(ScheduledThreadPoolExecutor.java:180) ~[na:1.8.0_181]
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:294) ~[na:1.8.0_181]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_181]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_181]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_181]
+Caused by: org.apache.http.conn.HttpHostConnectException: Connect to canal-admin:8089 [canal-admin/172.19.0.12] failed: Connection refused (Connection refused)
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:151) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:353) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:380) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:184) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:88) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:184) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82) ~[httpclient-4.5.1.jar:4.5.1]
+	at com.alibaba.otter.canal.instance.manager.plain.HttpHelper.get(HttpHelper.java:90) ~[canal.instance.manager-1.1.6.jar:na]
+	... 11 common frames omitted
+Caused by: java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method) ~[na:1.8.0_181]
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_181]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_181]
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_181]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_181]
+	at java.net.Socket.connect(Socket.java:589) ~[na:1.8.0_181]
+	at org.apache.http.conn.socket.PlainConnectionSocketFactory.connectSocket(PlainConnectionSocketFactory.java:74) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:134) ~[httpclient-4.5.1.jar:4.5.1]
+	... 20 common frames omitted
+2024-11-13 11:23:18.205 [canal-server-scan-0] ERROR com.alibaba.otter.canal.deployer.CanalLauncher - scan failed
+com.alibaba.otter.canal.common.CanalException: load manager config failed.
+Caused by: java.lang.RuntimeException: requestGet remote error, request : http://canal-admin:8089/api/v1/config/server_polling?ip=canal&port=11110&md5=f7c78b84dd5ae8fa5d73b821ac4235da&register=1&cluster=&name=d19acb96ea52
+	at com.alibaba.otter.canal.instance.manager.plain.HttpHelper.get(HttpHelper.java:100) ~[canal.instance.manager-1.1.6.jar:na]
+	at com.alibaba.otter.canal.instance.manager.plain.PlainCanalConfigClient.doQuery(PlainCanalConfigClient.java:121) ~[canal.instance.manager-1.1.6.jar:na]
+	at com.alibaba.otter.canal.instance.manager.plain.PlainCanalConfigClient.queryConfig(PlainCanalConfigClient.java:110) ~[canal.instance.manager-1.1.6.jar:na]
+	at com.alibaba.otter.canal.instance.manager.plain.PlainCanalConfigClient.findServer(PlainCanalConfigClient.java:77) ~[canal.instance.manager-1.1.6.jar:na]
+	at com.alibaba.otter.canal.deployer.CanalLauncher$1.run(CanalLauncher.java:99) ~[canal.deployer-1.1.6.jar:na]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [na:1.8.0_181]
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:308) [na:1.8.0_181]
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(ScheduledThreadPoolExecutor.java:180) [na:1.8.0_181]
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:294) [na:1.8.0_181]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_181]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_181]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_181]
+Caused by: org.apache.http.conn.HttpHostConnectException: Connect to canal-admin:8089 [canal-admin/172.19.0.12] failed: Connection refused (Connection refused)
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:151) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:353) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:380) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:184) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:88) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:184) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82) ~[httpclient-4.5.1.jar:4.5.1]
+	at com.alibaba.otter.canal.instance.manager.plain.HttpHelper.get(HttpHelper.java:90) ~[canal.instance.manager-1.1.6.jar:na]
+	... 11 common frames omitted
+Caused by: java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method) ~[na:1.8.0_181]
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_181]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_181]
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_181]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_181]
+	at java.net.Socket.connect(Socket.java:589) ~[na:1.8.0_181]
+	at org.apache.http.conn.socket.PlainConnectionSocketFactory.connectSocket(PlainConnectionSocketFactory.java:74) ~[httpclient-4.5.1.jar:4.5.1]
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:134) ~[httpclient-4.5.1.jar:4.5.1]
+	... 20 common frames omitted
+2024-11-13 11:30:38.505 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify stop 51-all successful.
+2024-11-13 11:30:38.747 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify start 51-all successful.
+2024-11-13 11:30:38.749 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify reload 51-all successful.
+2024-11-13 11:31:37.304 [Thread-4] INFO  c.a.o.canal.connector.kafka.producer.CanalKafkaProducer - ## stop the kafka producer
+2024-11-13 11:31:37.306 [Thread-3] INFO  com.alibaba.otter.canal.deployer.CanalStarter - ## stop the canal server
+2024-11-13 11:31:37.315 [Thread-4] INFO  c.a.o.canal.connector.kafka.producer.CanalKafkaProducer - ## kafka producer is down.
+2024-11-13 11:31:37.459 [Thread-3] INFO  com.alibaba.otter.canal.deployer.CanalController - ## stop the canal server[172.19.0.11(canal):11111]
+2024-11-13 11:31:37.468 [Thread-3] INFO  com.alibaba.otter.canal.deployer.CanalStarter - ## canal server is down.
+2024-11-13 11:31:40.238 [main] INFO  com.alibaba.otter.canal.deployer.CanalLauncher - ## set default uncaught exception handler
+2024-11-13 11:31:40.251 [main] INFO  com.alibaba.otter.canal.deployer.CanalLauncher - ## load canal configurations
+2024-11-13 11:31:40.754 [main] WARN  org.apache.kafka.clients.producer.ProducerConfig - The configuration 'kerberos.enable' was supplied but isn't a known config.
+2024-11-13 11:31:40.755 [main] WARN  org.apache.kafka.clients.producer.ProducerConfig - The configuration 'kerberos.krb5.file' was supplied but isn't a known config.
+2024-11-13 11:31:40.756 [main] WARN  org.apache.kafka.clients.producer.ProducerConfig - The configuration 'kerberos.jaas.file' was supplied but isn't a known config.
+2024-11-13 11:31:40.757 [main] INFO  com.alibaba.otter.canal.deployer.CanalStarter - ## start the canal server.
+2024-11-13 11:31:40.785 [main] INFO  com.alibaba.otter.canal.deployer.CanalController - ## start the canal server[172.19.0.11(canal):11111]
+2024-11-13 11:31:40.837 [main] INFO  com.alibaba.otter.canal.deployer.CanalStarter - ## the canal server is running now ......
+2024-11-13 11:31:41.931 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify start ps.user_money_local successful.
+2024-11-13 11:31:42.126 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify start 51-all successful.
+2024-11-13 11:37:54.610 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify stop 51-all successful.
+2024-11-13 11:37:54.747 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify start 51-all successful.
+2024-11-13 11:37:54.747 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify reload 51-all successful.
+2024-11-13 11:39:51.005 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify stop 51-all successful.
+2024-11-13 11:39:51.135 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify start 51-all successful.
+2024-11-13 11:39:51.137 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify reload 51-all successful.
+2024-11-13 12:21:22.800 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify stop 51-all successful.
+2024-11-13 12:21:32.914 [canal-instance-scan-0] INFO  com.alibaba.otter.canal.deployer.CanalController - auto notify stop ps.user_money_local successful.
+2024-11-13 12:21:49.150 [Thread-4] INFO  c.a.o.canal.connector.kafka.producer.CanalKafkaProducer - ## stop the kafka producer
+2024-11-13 12:21:49.150 [Thread-3] INFO  com.alibaba.otter.canal.deployer.CanalStarter - ## stop the canal server
+2024-11-13 12:21:49.152 [Thread-3] INFO  com.alibaba.otter.canal.deployer.CanalController - ## stop the canal server[172.19.0.11(canal):11111]
+2024-11-13 12:21:49.156 [Thread-4] INFO  c.a.o.canal.connector.kafka.producer.CanalKafkaProducer - ## kafka producer is down.
+2024-11-13 12:21:49.167 [Thread-3] INFO  com.alibaba.otter.canal.deployer.CanalStarter - ## canal server is down.

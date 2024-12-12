@@ -1,0 +1,10 @@
+{
+    "acl": {
+        "enabled": false,
+        "default_policy": "deny",
+		"enable_token_persistence": true,
+        "tokens": {
+            "master": "aa4d99e0-6580-dbd9-6cc4-c9149be5a7ff"
+        }
+    }
+}
